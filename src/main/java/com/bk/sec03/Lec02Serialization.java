@@ -33,10 +33,16 @@ public class Lec02Serialization {
     }
 
     public static void serialize(Person person) throws IOException {
-        person.writeTo(Files.newOutputStream(PATH));
+        try(var stream = Files.newOutputStream(PATH))
+        {
+            person.writeTo(stream);
+        }
     }
 
     public static Person deserialize() throws IOException {
-        return Person.parseFrom(Files.newInputStream(PATH));
+        try(var stream = Files.newInputStream(PATH))
+        {
+            return Person.parseFrom(stream);
+        }
     }
 }
