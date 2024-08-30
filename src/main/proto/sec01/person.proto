@@ -2,7 +2,13 @@ syntax = "proto3";
 
 package sec01;
 option java_package = "com.bk.models.sec01";
+
+/*
+multi line comment
+This is my proto
+ */
 message Person{
-  string name = 1;
+  // Single line comment
+  string name = 1; // I can comment here as well
   int32 age = 2;
 }
