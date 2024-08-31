@@ -28,7 +28,10 @@ public class Lec01Import {
                 .setAddress(address)
                 .setCar(car)
                 .build();
-        log.info(person.toString());
 
+
+        log.info(person.toString());
+        log.info("{}", person.hasAge());
+        log.info("{}", person.hasAddress());
     }
 }
