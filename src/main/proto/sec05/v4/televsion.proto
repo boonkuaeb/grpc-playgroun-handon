@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package sec05.v3;
+package sec05.v4;
 
 option java_multiple_files =true;
-option java_package = "com.bk.models.sec05.v3";
+option java_package = "com.bk.models.sec05.v4";
 /*
 Requirement:
 - We No longer need model/year! remove that!
@@ -13,6 +13,7 @@ message Television{
   reserved 2;
   reserved "year","model";
   Type type = 3;
+  int32 price =4;
 }
 
 enum Type{
