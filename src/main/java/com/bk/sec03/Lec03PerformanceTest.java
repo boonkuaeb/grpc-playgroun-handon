@@ -34,12 +34,16 @@ public class Lec03PerformanceTest {
         json(jsonPerson);
         proto(protoPerson);
     }
+
     private static void proto(Person person)
     {
 
         try {
+            // Serialize Proto person object to byte array
             var bytes = person.toByteArray();
-            logger.info("proto bytes length: {}", bytes.length);
+//            logger.info("proto bytes length: {}", bytes.length);
+
+            // Then Decode back to object
             Person.parseFrom(bytes);
         } catch (InvalidProtocolBufferException e) {
             throw new RuntimeException(e);
@@ -49,8 +53,11 @@ public class Lec03PerformanceTest {
     private static void json(JsonPersonDto person)
     {
         try {
+            // Convert Object to Byte Array
             var bytes =   mapper.writeValueAsBytes(person);
-            logger.info("json bytes length: {}", bytes.length);
+//            logger.info("json bytes length: {}", bytes.length);
+
+            // Convert Back to Object
             mapper.readValue(bytes,JsonPersonDto.class);
         } catch (Exception e) {
             throw new RuntimeException(e);
