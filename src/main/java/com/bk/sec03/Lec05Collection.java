@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class Lec05Collection {
-    private static Logger log = LoggerFactory.getLogger(Lec05Collection.class);
+    private static final Logger log = LoggerFactory.getLogger(Lec05Collection.class);
     public static void main(String[] args) {
         //create book
         var book1 = Book.newBuilder()
