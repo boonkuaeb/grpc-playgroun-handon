@@ -3,7 +3,7 @@ package com.bk.sec06;
 import com.bk.models.sec06.BalanceCheckRequest;
 import com.google.protobuf.Empty;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Assumptions;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
