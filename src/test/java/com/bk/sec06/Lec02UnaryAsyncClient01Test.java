@@ -7,11 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Timer;
 import java.util.concurrent.CountDownLatch;
 
-public class Lec02UnaryAsyncClientTest extends AbstractTest {
-    private static final Logger logger = LoggerFactory.getLogger(Lec02UnaryAsyncClientTest.class);
+public class Lec02UnaryAsyncClient01Test extends AbstractTest {
+    private static final Logger logger = LoggerFactory.getLogger(Lec02UnaryAsyncClient01Test.class);
 
     @Test
     public void getAsyncBalanceTest() throws InterruptedException {
@@ -19,7 +18,7 @@ public class Lec02UnaryAsyncClientTest extends AbstractTest {
                 .setAccountNumber(1)
                 .build();
         var latch =  new CountDownLatch(1);
-        this.asyncStub.getAccountBalance(request, new StreamObserver<AccountBalance>() {
+        this.bankStub.getAccountBalance(request, new StreamObserver<AccountBalance>() {
             @Override
             public void onNext(AccountBalance accountBalance) {
                 logger.info("Async account balance received: {}", accountBalance);

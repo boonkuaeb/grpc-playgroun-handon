@@ -7,30 +7,29 @@ import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class ResponseObServer<T> implements StreamObserver<T> {
-    private static final Logger logger = LoggerFactory.getLogger(ResponseObServer.class);
+public class ResponseObserver<T> implements StreamObserver<T> {
+    private static final Logger logger = LoggerFactory.getLogger(ResponseObserver.class);
     private final List<T> list = new ArrayList<>();
     private final CountDownLatch latch;
     private Throwable throwable;
 
-    public ResponseObServer(int countDown) {
+    public ResponseObserver(int countDown) {
         this.latch = new CountDownLatch(countDown);
     }
 
-    public static<T> ResponseObServer<T> create()
+    public static<T> ResponseObserver<T> create()
     {
-        return new ResponseObServer<>(1);
+        return new ResponseObserver<>(1);
     }
 
-    public static<T> ResponseObServer<T> countDown(int countDown)
+    public static<T> ResponseObserver<T> countDown(int countDown)
     {
-        return new ResponseObServer<>(countDown);
+        return new ResponseObserver<>(countDown);
     }
 
     @Override
