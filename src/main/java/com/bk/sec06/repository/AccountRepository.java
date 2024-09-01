@@ -11,7 +11,8 @@ public class AccountRepository {
             .boxed()
             .collect(Collectors.toConcurrentMap(
                     Function.identity(),
-                    v -> new Random().nextInt(1000000) + 1
+//                    v -> new Random().nextInt(1000000) + 1
+                    v ->100
             ));
 
     public static Integer getBalance(int accountNumber) {
