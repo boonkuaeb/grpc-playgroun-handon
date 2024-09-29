@@ -1,10 +1,8 @@
 package com.bk.sec06;
 
 import com.bk.common.ResponseObserver;
-import com.bk.models.sec06.AllAccountsResponse;
 import com.bk.models.sec06.Money;
 import com.bk.models.sec06.WithdrawRequest;
-import com.google.protobuf.Empty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
