@@ -1,6 +1,10 @@
 package com.bk.sec06;
 
+import com.bk.common.ResponseObserver;
+import com.bk.models.sec06.AllAccountsResponse;
+import com.bk.models.sec06.Money;
 import com.bk.models.sec06.WithdrawRequest;
+import com.google.protobuf.Empty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -24,6 +28,21 @@ public class Lec3ServerStreamingClientTest extends AbstractTest{
         }
 
         Assertions.assertEquals(2, count);
+    }
+
+    @Test
+    public void asyncClientWithdrawTest2() {
+        var request = WithdrawRequest.newBuilder()
+                .setAmount(20)
+                .setAccountNumber(2)
+                .build();
+
+        var observer = ResponseObserver.<Money>create();
+        this.bankStub.withdraw(request,observer);
+        observer.await();
+        Assertions.assertEquals(2, observer.getList().size());
+        Assertions.assertEquals(10, observer.getList().getFirst().getAmount());
+        Assertions.assertNull(observer.getThrowable());
     }
 
 }
