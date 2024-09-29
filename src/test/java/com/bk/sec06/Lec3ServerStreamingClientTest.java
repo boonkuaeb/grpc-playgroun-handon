@@ -10,7 +10,7 @@ public class Lec3ServerStreamingClientTest extends AbstractTest{
     private static final Logger log = LoggerFactory.getLogger(Lec3ServerStreamingClientTest.class);
 
     @Test
-    public void blockingClientWithdrawTest() throws Exception {
+    public void blockingClientWithdrawTest() {
         var request = WithdrawRequest.newBuilder()
                 .setAmount(20)
                 .setAccountNumber(2)
