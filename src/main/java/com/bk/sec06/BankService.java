@@ -67,7 +67,6 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
         }
         log.info("onCompleted");
         responseObserver.onCompleted();
-        return;
     }
 
     @Override
