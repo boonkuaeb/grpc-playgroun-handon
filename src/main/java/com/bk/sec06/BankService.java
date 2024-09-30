@@ -2,6 +2,7 @@ package com.bk.sec06;
 
 import com.bk.models.sec06.*;
 import com.bk.sec06.repository.AccountRepository;
+import com.bk.sec06.requesthandlers.DepositRequestHandler;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
@@ -67,5 +68,10 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
         log.info("onCompleted");
         responseObserver.onCompleted();
         return;
+    }
+
+    @Override
+    public StreamObserver<DepositRequest> deposit(StreamObserver<AccountBalance> responseObserver) {
+        return new DepositRequestHandler();
     }
 }
