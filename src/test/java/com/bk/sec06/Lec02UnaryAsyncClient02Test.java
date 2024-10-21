@@ -16,7 +16,7 @@ public class Lec02UnaryAsyncClient02Test extends AbstractTest {
     public void getBalanceTests() {
         var request = BalanceCheckRequest.newBuilder().setAccountNumber(1).build();
         var observer = ResponseObserver.<AccountBalance>create();
-        this.bankStub.getAccountBalance(request, observer);
+        this.stub.getAccountBalance(request, observer);
         observer.await();
         Assertions.assertEquals(1, observer.getList().size());
         Assertions.assertEquals(100, observer.getList().getFirst().getBalance());
@@ -26,7 +26,7 @@ public class Lec02UnaryAsyncClient02Test extends AbstractTest {
     @Test
     public void allAccountTest() {
         var observer = ResponseObserver.<AllAccountsResponse>create();
-        this.bankStub.getAllAccounts(Empty.getDefaultInstance(), observer);
+        this.stub.getAllAccounts(Empty.getDefaultInstance(), observer);
         observer.await();
         Assertions.assertEquals(1, observer.getList().size());
         Assertions.assertEquals(10, observer.getList().getFirst().getAccountsCount());

@@ -36,7 +36,7 @@ public class Lec3ServerStreamingClientTest extends AbstractTest{
                 .build();
 
         var observer = ResponseObserver.<Money>create();
-        this.bankStub.withdraw(request,observer);
+        this.stub.withdraw(request,observer);
         observer.await();
         Assertions.assertEquals(2, observer.getList().size());
         Assertions.assertEquals(10, observer.getList().getFirst().getAmount());

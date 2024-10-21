@@ -7,12 +7,11 @@ import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class DepositRequestHandler implements StreamObserver<DepositRequest> {
-
-    private static final Logger log = LoggerFactory.getLogger(DepositRequestHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(DepositRequestHandler.class);
     private final StreamObserver<AccountBalance> responseObserver;
     private int accountNumber;
+
 
     public DepositRequestHandler(StreamObserver<AccountBalance> responseObserver) {
         this.responseObserver = responseObserver;
@@ -20,22 +19,30 @@ public class DepositRequestHandler implements StreamObserver<DepositRequest> {
 
     @Override
     public void onNext(DepositRequest depositRequest) {
-        switch (depositRequest.getRequestCase())
-        {
-            case ACCOUNT_NUMBER -> accountNumber = depositRequest.getAccountNumber();
-            case MONEY -> AccountRepository.addAmount(this.accountNumber,depositRequest.getMoney().getAmount());
+        logger.info("Received deposit request {}",depositRequest.getRequestCase());
+        switch (depositRequest.getRequestCase()){
+            case ACCOUNT_NUMBER:
+                 this.accountNumber = depositRequest.getAccountNumber();
+                 logger.info("Account number: " + this.accountNumber);
+                break;
+            case MONEY :
+                AccountRepository.addAmount(this.accountNumber,depositRequest.getMoney().getAmount());
+                break;
         }
     }
 
     @Override
     public void onError(Throwable throwable) {
-        // Mid cancel from client
-        log.info("Client Error {}", throwable.getMessage());
+        logger.info("client error {}",throwable.getMessage());
     }
 
     @Override
     public void onCompleted() {
-        var accountBalance = AccountBalance.newBuilder().setAccountNumber(AccountRepository.getBalance(this.accountNumber)).build();
+        logger.info("client completed {} ,{}",this.accountNumber,AccountRepository.getBalance(this.accountNumber));
+        var accountBalance = AccountBalance.newBuilder()
+                .setAccountNumber(this.accountNumber)
+                .setBalance(AccountRepository.getBalance(this.accountNumber))
+                .build();
         this.responseObserver.onNext(accountBalance);
         this.responseObserver.onCompleted();
     }

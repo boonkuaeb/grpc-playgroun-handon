@@ -18,7 +18,7 @@ public class Lec02UnaryAsyncClient01Test extends AbstractTest {
                 .setAccountNumber(1)
                 .build();
         var latch =  new CountDownLatch(1);
-        this.bankStub.getAccountBalance(request, new StreamObserver<AccountBalance>() {
+        this.stub.getAccountBalance(request, new StreamObserver<AccountBalance>() {
             @Override
             public void onNext(AccountBalance accountBalance) {
                 logger.info("Async account balance received: {}", accountBalance);
